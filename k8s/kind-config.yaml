@@ -1,0 +1,14 @@
+# KIND cluster with host port mappings so the NodePort services are
+# reachable from outside the container on 12000 (frontend) and 12001 (backend).
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: helloworld
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 30080
+        hostPort: 12000
+        protocol: TCP
+      - containerPort: 30081
+        hostPort: 12001
+        protocol: TCP
